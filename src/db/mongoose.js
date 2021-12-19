@@ -1,5 +1,11 @@
-const mongoose = require('mongoose');
+require('dotenv').config()
 
-mongoose.connect('mongodb://localhost:27017/task-manager-api', {
-    useNewUrlParser: true,
-})
+
+const mongoose = require('mongoose');
+try {
+    mongoose.connect(process.env.MONGODB_LOCAL, {
+        useNewUrlParser: true,
+    })
+} catch (e) {
+    console.log('Error connecting to database', e)
+}

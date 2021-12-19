@@ -2,6 +2,8 @@ const express = require('express')
 require('./db/mongoose')
 const userRouter = require('./routers/user')
 const taskRouter = require('./routers/task')
+const auth = require('./middleware/auth')
+require('dotenv').config()
 
 const app = express()
 
@@ -17,18 +19,6 @@ app.get("/", (req, res) => {
 
 })
 
-const jwt = require('jsonwebtoken')
-const myFunction = async() => {
-    100
-    const token = jwt.sign({ _id: 'abc123' }, 'thisismysecret', { expiresIn: '1 year' })
-    try {
-        console.log(jwt.verify(token, 'thisismysecret'))
-    } catch (e) {
-        console.log("invalid token")
-    }
-
-}
-myFunction()
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
