@@ -2,7 +2,18 @@ const express = require('express')
 const User = require('../models/user')
 const router = new express.Router()
 const auth = require('../middleware/auth')
+const multer = require('multer')
 
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './uploads/avatars')
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname)
+    }
+})
+
+const avatar = multer({ storage: storage })
 
 //* POST Create Users
 
@@ -95,6 +106,18 @@ router.delete('/users/me', auth, async(req, res) => {
     }
 })
 
+const errorMiddleware = (req, res, next) => {
+    throw new Error('From my middleware')
+}
 
+
+//* Upload Image
+
+router.post('/users/me/avatar', auth, avatar.single('avatar'), (req, res) => {
+    res.send('ok')
+}, (error, req, res, next) => {
+    res.status(400).send({ error: error.message })
+
+})
 
 module.exports = router
