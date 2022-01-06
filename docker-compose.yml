@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  taskmanager:
+    image: taskmanager
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 80:80
