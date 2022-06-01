@@ -17,6 +17,9 @@ app.use(taskRouter)
 
 
 
+app.get("/tcs", (req, res) => {
+    res.send("<h1>Hello TCS</h1>")
+})
 
 app.get("*", (req, res) => {
     res.status(404).send(
