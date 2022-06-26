@@ -4,12 +4,14 @@ const userRouter = require('./routers/user')
 const taskRouter = require('./routers/task')
 const auth = require('./middleware/auth')
 require('dotenv').config()
+const cors = require('cors')
 
 
 const app = express()
 
 const port = process.env.PORT || 80
 
+app.use(cors())
 app.use(express.json())
 app.use(userRouter)
 app.use(taskRouter)
