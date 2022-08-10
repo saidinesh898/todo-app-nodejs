@@ -25,7 +25,7 @@ router.get('/tasks/', auth, async(req, res) => {
     const match = {}
     const sort = {}
 
-    if (req.query.statuis) {
+    if (req.query.status) {
         match.completed = req.query.completed === 'true'
     }
 
